@@ -1,0 +1,99 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random r = new Random();
+
+        System.out.println("Enter team1 Name: ");
+        String t1 = sc.nextLine();
+
+        System.out.println("Enter team2 Name: ");
+        String t2 = sc.nextLine();
+
+        // Random scores for each team between 1 and 300
+        int ans1 = r.nextInt(300) + 1;
+        int ans2 = r.nextInt(300) + 1;
+
+        // Hints for team 1
+        String[] hint1 = new String[3];
+        hint1[0] = ans1 > 150 ? "It is greater than 150" : "It is less than 150";
+        hint1[1] = ans1 % 2 == 0 ? "It is an even number" : "It is an odd number";
+        hint1[2] = ans1 % 5 == 0 ? "It is divisible by 5" : "It is not divisible by 5";
+
+        // Hints for team 2
+        String[] hint2 = new String[3];
+        hint2[0] = ans2 > 150 ? "It is greater than 150" : "It is less than 150";
+        hint2[1] = ans2 % 2 == 0 ? "It is an even number" : "It is an odd number";
+        hint2[2] = ans2 % 5 == 0 ? "It is divisible by 5" : "It is not divisible by 5";
+
+        int count1 = 0;
+        int count2 = 0;
+
+        // Team 1 Guessing
+        System.out.println("\nGuess the score for " + t1 + ":");
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Would you like a hint? (yes/no)");
+            String hintResponse = sc.next().toLowerCase();
+
+            if (hintResponse.equals("yes")) {
+                System.out.println("Hint: " + hint1[i]);
+            }
+
+            System.out.print("Your guess: ");
+            int guess = sc.nextInt();
+
+            if (guess == ans1) {
+                System.out.println("Correct! You guessed the score for " + t1 + "!");
+                count1 = 3 - i; // Award points based on how many attempts it took
+                break;
+            } else {
+                System.out.println("Wrong guess. Try again.");
+            }
+        }
+        if (count1 == 0) {
+            System.out.println("The correct score for " + t1 + " was: " + ans1);
+        }
+
+        // Team 2 Guessing
+        System.out.println("\nGuess the score for " + t2 + ":");
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Would you like a hint? (yes/no)");
+            String hintResponse = sc.next().toLowerCase();
+
+            if (hintResponse.equals("yes")) {
+                System.out.println("Hint: " + hint2[i]);
+            }
+
+            System.out.print("Your guess: ");
+            int guess = sc.nextInt();
+
+            if (guess == ans2) {
+                System.out.println("Correct! You guessed the score for " + t2 + "!");
+                count2 = 3 - i; // Award points based on how many attempts it took
+                break;
+            } else {
+                System.out.println("Wrong guess. Try again.");
+            }
+        }
+        if (count2 == 0) {
+            System.out.println("The correct score for " + t2 + " was: " + ans2);
+        }
+
+        // Determine and print the winner based on the actual scores
+        System.out.println("\nFinal Results:");
+        System.out.println(t1 + " Score: " + ans1);
+        System.out.println(t2 + " Score: " + ans2);
+
+        if (ans1 > ans2) {
+            System.out.println(t1 + " wins with a score of " + ans1 + "!");
+        } else if (ans2 > ans1) {
+            System.out.println(t2 + " wins with a score of " + ans2 + "!");
+        } else {
+            System.out.println("It's a tie!");
+        }
+
+        sc.close();
+    }
+}
