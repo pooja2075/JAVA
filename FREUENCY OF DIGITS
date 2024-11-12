@@ -1,0 +1,30 @@
+import java.util.*;
+public  class Main {
+    public static void csbs(int num)
+    {
+        HashMap<Character,Integer> pooja=new HashMap<>();
+        String str=Integer.toString(num);
+        for(int i=0;i<str.length();i++)
+        {
+            char ch=str.charAt(i);
+            pooja.put(ch,pooja.getOrDefault(ch,0)+1);
+        }
+        System.out.println(pooja);
+        int c=0;
+        for(int a:pooja.values())
+        {
+            if(a>1)
+            c++;
+        }
+        System.out.println(c);
+    }
+    
+    
+    
+
+    public static void main (String[] args)
+    {
+        int num = 98374659;
+        csbs(num);
+    }
+}
